@@ -1,0 +1,15 @@
+.list {
+  border: 1px solid blue;
+  text-align: left;
+  list-style: none;
+}
+
+.list-item {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.list-item:hover {
+  color: red;
+  cursor: pointer;
+}
