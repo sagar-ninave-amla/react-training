@@ -6,21 +6,19 @@ const PostItem = () => {
   const { name } = useParams();
   const { search } = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
-    fetch(`https://cataas.com/cat/says/${name}${search}`).then((result) => {
-      console.log("result : ", result?.url);
-      setImage(result?.url);
-    });
+    fetch(`https://cataas.com/cat/says/${name}${search}`).then((result) =>
+      setImage(result?.url)
+    );
   }, []);
   return (
     <>
       <div style={{ margin: "2rem" }}>
         <button onClick={() => navigate(-1)}> Previous </button>
         <button onClick={() => navigate(1)}> Next </button>
-        <button onClick={() => navigate("/post")}> Posts </button>
       </div>
-
-      <img src={image} style={{ width: "300px", height: "auto" }} />
+      {image ? <img src={image} width="300px" height="auto" /> : "Loading..."}
     </>
   );
 };
