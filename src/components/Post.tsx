@@ -1,54 +1,47 @@
-import React, { useState } from "react";
-import { Input, Select } from "antd";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, FC, ReactElement, useState } from "react";
+import { Button, Form, Input, Select } from "antd";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { colorOptions, sizeOptions } from "../constants";
 
-const Post = () => {
-  const [name, setName] = useState("");
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
-  const navigate = useNavigate();
+const Post: FC = (): ReactElement => {
+  const navigate: NavigateFunction = useNavigate();
+
+  const [name, setName] = useState<string>("");
+  const [color, setColor] = useState<string>("");
+  const [size, setSize] = useState<string>("");
+
+  const onHandleSubmit = (): void =>
+    navigate(`${name}?fontSize=${size}&fontColor=${color}`);
+
+  const onHandleName = (event: ChangeEvent<HTMLInputElement>): void =>
+    setName(event.target.value);
+
+  const onHandleColor = (event: string): void => setColor(event);
+
+  const onHandleSize = (event: string): void => setSize(event);
+
   return (
-    <div style={{ width: "200px" }}>
-      Name
-      <Input
-        placeholder="enter name"
-        onChange={(e) => setName(e.target.value)}
-      />
-      Font Color
-      <Select
-        style={{ width: 120 }}
-        onChange={(e) => setColor(e)}
-        options={[
-          { value: "red", label: "Red" },
-          { value: "green", label: "Green" },
-          { value: "blue", label: "Blue" },
-          { value: "black", label: "Black" },
-          { value: "white", label: "White" },
-        ]}
-      />
-      Font Size
-      <Select
-        style={{ width: 120 }}
-        onChange={(e) => setSize(e)}
-        options={[
-          { value: "100", label: "100" },
-          { value: "200", label: "200" },
-          { value: "300", label: "300" },
-          { value: "400", label: "400" },
-          { value: "500", label: "500" },
-        ]}
-      />
+    <Form
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 14 }}
+      layout="horizontal"
+      style={{ maxWidth: 600, margin: "1rem", display: "block" }}
+    >
+      <Form.Item label="Name">
+        <Input placeholder="enter name" onChange={onHandleName} />
+      </Form.Item>
+      <Form.Item label="Font Size">
+        <Select onChange={onHandleSize} options={sizeOptions} />
+      </Form.Item>
+      <Form.Item label="Font Color">
+        <Select onChange={onHandleColor} options={colorOptions} />
+      </Form.Item>
       {name && (
-        <button
-          onClick={() =>
-            navigate(`${name}?fontSize=${size}&fontColor=${color}`)
-          }
-        >
-          {" "}
-          Submit{" "}
-        </button>
+        <Form.Item>
+          <Button onClick={onHandleSubmit}>Submit</Button>
+        </Form.Item>
       )}
-    </div>
+    </Form>
   );
 };
 export default Post;

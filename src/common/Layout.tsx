@@ -1,8 +1,9 @@
+import { ReactElement, FC } from "react";
 import { Outlet } from "react-router-dom";
 import FooterComponent from "./Footer";
 import HeaderComponent from "./Header";
 
-const Layout = () => {
+const Layout: FC = (): ReactElement => {
   return (
     <>
       <HeaderComponent />
