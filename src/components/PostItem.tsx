@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useState, useEffect, ReactElement } from "react";
+import { Image, Button } from "antd";
+import { FC, useState, useEffect, ReactElement } from "react";
 import {
   useParams,
   useLocation,
@@ -8,7 +9,6 @@ import {
   Params,
   NavigateFunction,
 } from "react-router-dom";
-import { Image, Button } from "antd";
 
 const PostItem: FC = (): ReactElement => {
   const { name }: Params<any> = useParams();
